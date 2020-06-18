@@ -46,16 +46,16 @@ def loadData(fileName):
         y = np.reshape(y, (-1, 1))  
         return x, y
 
-# df = pd.read_csv('data.csv')
-# plt.plot(df['<Close>'])
-# plt.show()
+df = pd.read_csv('data.csv')
+plt.plot(df['<Close>'])
+plt.show()
 
-NUM_NEURONS_FirstDenseLayer = 128
-NUM_NEURONS_SecondDenseLayer = 32
-lstm_hidden_sizes = 32
+NUM_NEURONS_FirstDenseLayer = 256
+NUM_NEURONS_SecondDenseLayer = 64
+lstm_hidden_sizes = 50
 number_of_parameters = 4 ## số lượng tham số dùng để dự đoán
 epochs = 20
-batch_size = 4
+batch_size = 64
 fileNameTrain = 'data2.csv'
 fileNameTest = 'data.csv'
 
@@ -72,7 +72,7 @@ model.add(LSTM(lstm_hidden_sizes))
 model.add(Dense(NUM_NEURONS_FirstDenseLayer, activation='relu'))
 model.add(Dense(NUM_NEURONS_SecondDenseLayer, activation='relu'))
 model.add(Dense(1))
-opt = Adam(learning_rate=0.01)
+opt = Adam(learning_rate=0.1)
 model.compile(loss='mean_squared_error', optimizer=opt, metrics='mean_squared_error')
 
 x, y = loadData(fileNameTrain)
